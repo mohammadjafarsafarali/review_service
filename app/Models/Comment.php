@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,7 @@ class Comment extends Model
      * @var string[]
      */
     protected $fillable = [
-        'product_id',
+        'option_id',
         'user_id',
         'comment',
         'vote',
@@ -38,5 +39,14 @@ class Comment extends Model
     public function scopePending($query)
     {
         return $query->where('status', 'pending');
+    }
+
+    /**
+     * @return BelongsTo
+     * @author mj.safarali
+     */
+    public function option(): BelongsTo
+    {
+        return $this->belongsTo(Option::class,'option_id','id','options');
     }
 }

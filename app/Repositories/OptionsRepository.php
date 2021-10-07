@@ -32,7 +32,6 @@ class OptionsRepository
         return $this->option->where('product_id', '=', $product_id)->firstOrFail()->is_visible;
     }
 
-
     /**
      * @param $product_id
      * @return mixed
@@ -41,7 +40,7 @@ class OptionsRepository
     public function returnOptionsIfVisible($product_id)
     {
         return $this->option
-            ->select(['product_id', 'product_visibility', 'comments_mode', 'vote_mode'])
+            ->select(['id', 'product_id', 'product_visibility', 'comments_mode', 'vote_mode'])
             ->where('product_id', '=', $product_id)
             ->visible()
             ->first();
@@ -70,5 +69,4 @@ class OptionsRepository
         }
 
     }
-
 }

@@ -15,8 +15,8 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->index('product_id');
+            $table->unsignedBigInteger('option_id');
+            $table->foreign('option_id')->references('id')->on('options')->cascadeOnDelete();
             $table->unsignedBigInteger('user_id')->nullable(); //set nullable for public comment mode
             $table->text('comment')->nullable();
             $table->integer('vote')->nullable();

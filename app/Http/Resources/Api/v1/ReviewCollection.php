@@ -15,7 +15,6 @@ class ReviewCollection extends ResourceCollection
      */
     public function toArray($request): array
     {
-
         return responseApi(
             'success',
             NULL,
@@ -23,7 +22,7 @@ class ReviewCollection extends ResourceCollection
             $this->collection->transform(function ($comment) {
                 return [
                     'id' => $comment->id,
-                    'product_id' => $comment->product_id,
+                    'product_id' => $comment->option->id,
                     'user_id' => $comment->user_id,
                     'comment' => $comment->comment,
                     'vote' => $comment->vote,

@@ -34,7 +34,15 @@ class CommentsService
      */
     public function insertComment($request): array
     {
-        $this->commentsRepository->insertComment($this->checkAndPrepareDataForInsert($request));
+        $product_options = $this->checkAndPrepareDataForInsert($request);
+
+        $preparing_data = [
+//            'product_id' => $request->product_id,
+            'user_id' => NULL, #TODO: FILL WHEN USER IS LOGGED_IN AND RECEIVE FROM AUTH SERVICE
+            'comment' => $request->comment,
+            'vote' => $request->vote
+        ];
+        $this->commentsRepository->insertComment($product_options, $preparing_data);
         //return response
         return responseApi('success', NULL, config('review_message.insert_comment.success_message'), NULL);
     }
@@ -43,7 +51,7 @@ class CommentsService
      * @throws BindingResolutionException
      * @throws InsertCommentException
      */
-    private function checkAndPrepareDataForInsert($request): array
+    private function checkAndPrepareDataForInsert($request)
     {
         $optionsService = app()->make(OptionsService::class);
 
@@ -53,8 +61,7 @@ class CommentsService
         //check if options is null (means hidden product)
         if (is_null($product_options)) {
             throw new InsertCommentException(config('review_message.insert_comment.product_visibility_failed'), 422);
-        }
-        //check if comment mode or vote mode is on `REVIEW_CONSUMER_MODE`
+        } //check if comment mode or vote mode is on `REVIEW_CONSUMER_MODE`
         elseif (
             $product_options->comments_mode == $product_options::REVIEW_CONSUMER_MODE ||
             $product_options->vote_mode == $product_options::REVIEW_CONSUMER_MODE
@@ -77,12 +84,7 @@ class CommentsService
         }
 
         //insert comment
-        return [
-            'product_id' => $request->product_id,
-            'user_id' => NULL, #TODO: FILL WHEN USER IS LOGGED_IN AND RECEIVE FROM AUTH SERVICE
-            'comment' => $request->comment,
-            'vote' => $request->vote
-        ];
+        return $product_options;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property boolean product_visibility
@@ -64,5 +65,14 @@ class Option extends Model
     public function scopeVisible($query)
     {
         return $query->where('product_visibility', '=', true);
+    }
+
+    /**
+     * @return HasMany
+     * @author mj.safarali
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
