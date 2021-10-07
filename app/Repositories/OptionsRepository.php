@@ -49,6 +49,9 @@ class OptionsRepository
                     ->orderBy('updated_at', 'desc')
                     ->take(3);
             }])
+            ->withCount(['comments' => function ($query) {
+                $query->passed();
+            }])
             ->first();
     }
 
