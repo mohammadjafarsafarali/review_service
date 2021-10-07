@@ -74,7 +74,7 @@ class CommentsRepository
                 //get option
                 $option = $comment->option()->first();
                 //get count of affected comment vote => not empty and status = passed
-                $count = $this->comment->whereNotNull('vote')->passed()->count();
+                $count = $this->comment->whereNotNull('vote')->passed()->where('option_id',$option->id)->count();
                 //calculate new average
                 $newVoteAvg = $count > 0 ? (($option->vote_avg * $count) + $comment->vote) / ($count + 1) : $comment->vote;
                 //plus average process
@@ -89,7 +89,7 @@ class CommentsRepository
             ) {
                 $option = $comment->option()->first();
                 //get count of affected comment vote => not empty and status = passed
-                $count = $this->comment->whereNotNull('vote')->passed()->count();
+                $count = $this->comment->whereNotNull('vote')->passed()->where('option_id',$option->id)->count();
                 //calculate new average
                 $newVoteAvg = $count > 1 ? (($option->vote_avg * $count) - $comment->vote) / ($count - 1) : 0;
                 $option->vote_avg = round($newVoteAvg, 1);

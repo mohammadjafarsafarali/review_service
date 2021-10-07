@@ -6,8 +6,9 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use App\Http\Resources\Api\v1\ChangeReviewStatusResource;
 use App\Http\Requests\Api\v1\ChangeReviewStatusRequest;
 use App\Http\Resources\Api\v1\InsertCommentResource;
-use App\Http\Resources\Api\v1\ReviewCollection;
+use App\Http\Requests\Api\v1\InsertReviewRequest;
 use App\Exceptions\UpdateReviewStatusException;
+use App\Http\Resources\Api\v1\ReviewCollection;
 use App\Exceptions\InsertCommentException;
 use App\Http\Controllers\Controller;
 use App\Services\CommentsService;
@@ -36,7 +37,7 @@ class CommentsController extends Controller
      * @throws BindingResolutionException
      * @author mj.safarali
      */
-    public function insert(Request $request): InsertCommentResource
+    public function insert(InsertReviewRequest $request): InsertCommentResource
     {
         //insert comments
         $comment = $this->commentsService->insertComment($request);

@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::prefix('v1/review')->group(function () {
+    //get options for one product
+    Route::get('get-options/{product_id}', [OptionsController::class, 'getOptions']);
+    //set options for one product
+    Route::post('set-options/{product_id}', [OptionsController::class, 'setOptions']);
+    //insert new review(comment or vote or both)
+    Route::post('review-insert', [CommentsController::class, 'insert']);
+    //get list of all pending review
+    Route::get('review-pending-list', [CommentsController::class, 'getAllPendingComments']);
+    //change one review status
+    Route::post('status-change', [CommentsController::class, 'changeReviewStatus']);
+});
 
-Route::get('/v1/review-options/{product_id}', [OptionsController::class, 'getOptions']);
-Route::post('/v1/review-set/{product_id}', [OptionsController::class, 'setOptions']);
-Route::post('/v1/review-insert', [CommentsController::class, 'insert']);
-Route::get('/v1/review-pending', [CommentsController::class, 'getAllPendingComments']);
-Route::post('/v1/review/status-change', [CommentsController::class, 'changeReviewStatus']);
