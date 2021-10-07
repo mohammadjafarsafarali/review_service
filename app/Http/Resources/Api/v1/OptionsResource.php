@@ -23,8 +23,8 @@ class OptionsResource extends JsonResource
                 ] : NULL,
             'summery' =>
                 (isset($this->is_visible) && $this->is_visible) ? [
-                    'comments' => '',
-                    'vote' => ''
+                    'comments' => $this->comments->pluck('comment'),
+                    'vote' => $this->vote_avg
                 ] : NULL,
         ]);
     }

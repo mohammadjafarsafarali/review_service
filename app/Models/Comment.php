@@ -42,11 +42,21 @@ class Comment extends Model
     }
 
     /**
+     * @param $query
+     * @return mixed
+     * @author mj.safarali
+     */
+    public function scopePassed($query)
+    {
+        return $query->where('status', 'passed');
+    }
+
+    /**
      * @return BelongsTo
      * @author mj.safarali
      */
     public function option(): BelongsTo
     {
-        return $this->belongsTo(Option::class,'option_id','id','options');
+        return $this->belongsTo(Option::class,'option_id','id');
     }
 }

@@ -37,7 +37,6 @@ class CommentsService
         $product_options = $this->checkAndPrepareDataForInsert($request);
 
         $preparing_data = [
-//            'product_id' => $request->product_id,
             'user_id' => NULL, #TODO: FILL WHEN USER IS LOGGED_IN AND RECEIVE FROM AUTH SERVICE
             'comment' => $request->comment,
             'vote' => $request->vote

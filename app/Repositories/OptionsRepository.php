@@ -40,9 +40,15 @@ class OptionsRepository
     public function returnOptionsIfVisible($product_id)
     {
         return $this->option
-            ->select(['id', 'product_id', 'product_visibility', 'comments_mode', 'vote_mode'])
+            ->select(['id', 'product_id', 'product_visibility', 'comments_mode', 'vote_mode', 'vote_avg'])
             ->where('product_id', '=', $product_id)
             ->visible()
+            ->with(['comments' => function ($query) {
+                $query->select(['option_id', 'comment'])
+                    ->passed()
+                    ->orderBy('updated_at', 'desc')
+                    ->take(3);
+            }])
             ->first();
     }
 

@@ -20,6 +20,7 @@ class CreateOptionsTable extends Migration
             $table->boolean('product_visibility');
             $table->enum('comments_mode', ['public', 'consumer', 'deactive']);
             $table->enum('vote_mode', ['public', 'consumer', 'deactive']);
+            $table->float('vote_avg', 2, 1)->default(0);
             $table->timestamps();
         });
     }

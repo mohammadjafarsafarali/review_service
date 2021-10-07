@@ -22,6 +22,7 @@ class Option extends Model
         'product_visibility',
         'comments_mode',
         'vote_mode',
+        'vote_avg'
     ];
 
     /**
