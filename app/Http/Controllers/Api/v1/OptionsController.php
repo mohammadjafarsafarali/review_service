@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\v1\OptionsResource;
+use App\Http\Controllers\Controller;
 use App\Services\OptionsService;
-use Illuminate\Http\Request;
 
 class OptionsController extends Controller
 {
