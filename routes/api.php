@@ -19,3 +19,4 @@ Route::get('/v1/review-options/{product_id}', [OptionsController::class, 'getOpt
 Route::post('/v1/review-set/{product_id}', [OptionsController::class, 'setOptions']);
 Route::post('/v1/review-insert', [CommentsController::class, 'insert']);
 Route::get('/v1/review-pending', [CommentsController::class, 'getAllPendingComments']);
+Route::post('/v1/review/status-change', [CommentsController::class, 'changeReviewStatus']);

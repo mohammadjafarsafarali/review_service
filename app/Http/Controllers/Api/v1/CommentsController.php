@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Exceptions\UpdateReviewStatusException;
+use App\Http\Requests\Api\v1\ChangeReviewStatusRequest;
+use App\Http\Resources\Api\v1\ChangeReviewStatusResource;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use App\Http\Resources\Api\v1\InsertCommentResource;
 use App\Http\Resources\Api\v1\ReviewCollection;
@@ -51,5 +54,19 @@ class CommentsController extends Controller
         $comments = $this->commentsService->getAllPendingComments();
         //return response
         return new ReviewCollection($comments);
+    }
+
+    /**
+     * @param ChangeReviewStatusRequest $request
+     * @return ChangeReviewStatusResource
+     * @throws UpdateReviewStatusException
+     * @author mj.safarali
+     */
+    public function changeReviewStatus(ChangeReviewStatusRequest $request): ChangeReviewStatusResource
+    {
+        //update status of review
+        $comments = $this->commentsService->changeReviewStatus($request);
+        //return response
+        return new ChangeReviewStatusResource($comments);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Exceptions\InsertCommentException;
+use App\Exceptions\UpdateReviewStatusException;
 use Illuminate\Database\QueryException;
 use App\Models\Comment;
 use Exception;
@@ -46,5 +47,22 @@ class CommentsRepository
     public function getAllPendingComments()
     {
         return $this->comment->select(['id', 'product_id', 'user_id', 'comment', 'vote', 'status'])->pending()->get();
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     * @throws UpdateReviewStatusException
+     * @author mj.safarali
+     */
+    public function changeReviewStatus($request)
+    {
+        try {
+            return $this->comment->find($request->review_id)->update(['status' => $request->status]);
+        }
+        catch (exception $e) {
+            throw new UpdateReviewStatusException(config('review_message.review.update_failed'));
+        }
+
     }
 }

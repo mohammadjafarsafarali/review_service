@@ -4,6 +4,8 @@
 namespace App\Services;
 
 
+use App\Exceptions\UpdateReviewStatusException;
+use App\Http\Requests\Api\v1\ChangeReviewStatusRequest;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use App\Exceptions\InsertCommentException;
 use App\Repositories\CommentsRepository;
@@ -91,5 +93,16 @@ class CommentsService
     public function getAllPendingComments()
     {
         return $this->commentsRepository->getAllPendingComments();
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     * @throws UpdateReviewStatusException
+     * @author mj.safarali
+     */
+    public function changeReviewStatus($request)
+    {
+        return $this->commentsRepository->changeReviewStatus($request);
     }
 }
