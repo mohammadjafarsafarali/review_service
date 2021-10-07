@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/v1/review/{product_id}', [OptionsController::class, 'getOptions']);
+Route::get('/v1/review-options/{product_id}', [OptionsController::class, 'getOptions']);
 Route::post('/v1/review-set/{product_id}', [OptionsController::class, 'setOptions']);
-Route::post('/v1/review/insert', [CommentsController::class, 'insert']);
+Route::post('/v1/review-insert', [CommentsController::class, 'insert']);
+Route::get('/v1/review-pending', [CommentsController::class, 'getAllPendingComments']);

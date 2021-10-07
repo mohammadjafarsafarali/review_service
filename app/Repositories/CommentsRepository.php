@@ -4,9 +4,9 @@ namespace App\Repositories;
 
 
 use App\Exceptions\InsertCommentException;
+use Illuminate\Database\QueryException;
 use App\Models\Comment;
 use Exception;
-use Illuminate\Database\QueryException;
 
 class CommentsRepository
 {
@@ -37,5 +37,14 @@ class CommentsRepository
         } catch (QueryException $exception) {
             throw new InsertCommentException(config('review_message.insert_comment.failed_message'), 422);
         }
+    }
+
+    /**
+     * @return mixed
+     * @author mj.safarali
+     */
+    public function getAllPendingComments()
+    {
+        return $this->comment->select(['id', 'product_id', 'user_id', 'comment', 'vote', 'status'])->pending()->get();
     }
 }

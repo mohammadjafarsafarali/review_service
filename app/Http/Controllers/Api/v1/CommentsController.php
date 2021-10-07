@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
+use App\Http\Resources\Api\v1\InsertCommentResource;
+use App\Http\Resources\Api\v1\ReviewCollection;
 use App\Exceptions\InsertCommentException;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\v1\InsertCommentResource;
 use App\Services\CommentsService;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -38,5 +39,17 @@ class CommentsController extends Controller
         $comment = $this->commentsService->insertComment($request);
         //return response
         return new InsertCommentResource($comment);
+    }
+
+    /**
+     * @return ReviewCollection
+     * @author mj.safarali
+     */
+    public function getAllPendingComments(): ReviewCollection
+    {
+        //get all pending comments
+        $comments = $this->commentsService->getAllPendingComments();
+        //return response
+        return new ReviewCollection($comments);
     }
 }

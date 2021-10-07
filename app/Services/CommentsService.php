@@ -83,4 +83,13 @@ class CommentsService
             'vote' => $request->vote
         ];
     }
+
+    /**
+     * @return mixed
+     * @author mj.safarali
+     */
+    public function getAllPendingComments()
+    {
+        return $this->commentsRepository->getAllPendingComments();
+    }
 }

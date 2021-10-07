@@ -12,6 +12,9 @@ class Comment extends Model
 
     const FIRST_COMMENT_STATUS = 'pending';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'product_id',
         'user_id',
@@ -20,8 +23,20 @@ class Comment extends Model
         'status',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $attributes = [
         'status' => self::FIRST_COMMENT_STATUS,
     ];
 
+    /**
+     * @param $query
+     * @return mixed
+     * @author mj.safarali
+     */
+    public function scopePending($query)
+    {
+        return $query->where('status', 'pending');
+    }
 }
