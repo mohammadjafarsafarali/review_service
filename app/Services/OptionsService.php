@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Exceptions\SetOptionsExceptions;
 use App\Repositories\OptionsRepository;
 
 class OptionsService
@@ -24,16 +25,6 @@ class OptionsService
 
     /**
      * @param $product_id
-     * @return bool
-     * @author mj.safarali
-     */
-    public function checkVisibility($product_id): bool
-    {
-        return $this->optionsRepository->is_visible($product_id);
-    }
-
-    /**
-     * @param $product_id
      * @return mixed
      * @author mj.safarali
      */
@@ -46,25 +37,13 @@ class OptionsService
      * @param $product_id
      * @param $request
      * @return array
+     * @throws SetOptionsExceptions
      * @author mj.safarali
      */
     public function setOptions($product_id, $request): array
     {
-        $options = $this->optionsRepository->setOptions($product_id, $request);
-        if ($options instanceof \Illuminate\Database\Eloquent\Model) {
-            return [
-                'status' => 'success',
-                'error' => NULL,
-                'message' => config('review_message.set_options.success_message'),
-                'data' => [],
-            ];
-        }
-
-        return [
-            'status' => 'failed',
-            'error' => $options->getPrevious()->getMessage(),
-            'message' => config('review_message.set_options.failed_message'),
-            'data' => [],
-        ];
+        $this->optionsRepository->setOptions($product_id, $request);
+        //return response
+        return responseApi('success', NULL, config('review_message.set_options.success_message'));
     }
 }

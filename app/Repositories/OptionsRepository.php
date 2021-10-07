@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 
+use App\Exceptions\SetOptionsExceptions;
 use App\Models\Option;
 
 class OptionsRepository
@@ -50,6 +51,7 @@ class OptionsRepository
      * @param $product_id
      * @param $request
      * @return mixed
+     * @throws SetOptionsExceptions
      * @author mj.safarali
      */
     public function setOptions($product_id, $request)
@@ -64,7 +66,7 @@ class OptionsRepository
                 ]
             );
         } catch (\Illuminate\Database\QueryException $exception) {
-            return $exception;
+            throw new SetOptionsExceptions(config('review_message.set_options.failed_message'), 422);
         }
 
     }

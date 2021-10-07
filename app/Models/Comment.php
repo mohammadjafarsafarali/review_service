@@ -10,6 +10,8 @@ class Comment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const FIRST_COMMENT_STATUS = 'pending';
+
     protected $fillable = [
         'product_id',
         'user_id',
@@ -17,4 +19,9 @@ class Comment extends Model
         'vote',
         'status',
     ];
+
+    protected $attributes = [
+        'status' => self::FIRST_COMMENT_STATUS,
+    ];
+
 }

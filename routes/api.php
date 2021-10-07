@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\CommentsController;
 use App\Http\Controllers\Api\v1\OptionsController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/v1/review/{product_id}', [OptionsController::class, 'getOptions']);
 Route::post('/v1/review-set/{product_id}', [OptionsController::class, 'setOptions']);
+Route::post('/v1/review/insert', [CommentsController::class, 'insert']);

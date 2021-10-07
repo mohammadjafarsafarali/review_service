@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Option extends Model
 {
+    const REVIEW_PUBLIC_MODE = 'public';
+    const REVIEW_CONSUMER_MODE = 'consumer';
+    const REVIEW_DEACTIVE_MODE = 'deactive';
+
     use HasFactory;
 
     protected $fillable = [

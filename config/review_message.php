@@ -14,5 +14,10 @@ return [
     'set_options' => [
         'success_message' => 'تنظیمات مدنظر باموفقیت به ثبت رسید',
         'failed_message' => 'ثبت تنظیمات با اختلال مواجه شد',
+    ],
+    'insert_comment' => [
+        'success_message' => 'نظر شما باموفقیت به ثبت رسید',
+        'product_visibility_failed' => 'این محصول ناموجود یا در وضعیت غیرفعال است',
+        'review_consumer_failed' => 'ثبت نظر و یا امتیاز دهی به این محصول صرفا برای خریداران آن مجاز است',
     ]
 ];
