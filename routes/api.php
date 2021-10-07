@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/v1/review/{product_id}', [OptionsController::class, 'reviewOptions']);
+Route::get('/v1/review/{product_id}', [OptionsController::class, 'getOptions']);
+Route::post('/v1/review-set/{product_id}', [OptionsController::class, 'setOptions']);

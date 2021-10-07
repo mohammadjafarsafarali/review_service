@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Models\Option;
+use Throwable;
 
 class OptionsRepository
 {
@@ -44,6 +45,29 @@ class OptionsRepository
             ->where('product_id', '=', $product_id)
             ->visible()
             ->first();
+    }
+
+    /**
+     * @param $product_id
+     * @param $request
+     * @return mixed
+     * @author mj.safarali
+     */
+    public function setOptions($product_id, $request)
+    {
+        try {
+            return $this->option->updateOrCreate(
+                ['product_id' => $product_id],
+                [
+                    'product_visibility' => $request->visible,
+                    'comments_mode' => $request->comments_mode,
+                    'vote_mode' => $request->vote_mode,
+                ]
+            );
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return $exception;
+        }
+
     }
 
 }

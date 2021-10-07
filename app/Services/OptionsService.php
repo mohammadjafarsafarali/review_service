@@ -41,4 +41,30 @@ class OptionsService
     {
         return $this->optionsRepository->returnOptionsIfVisible($product_id);
     }
+
+    /**
+     * @param $product_id
+     * @param $request
+     * @return array
+     * @author mj.safarali
+     */
+    public function setOptions($product_id, $request): array
+    {
+        $options = $this->optionsRepository->setOptions($product_id, $request);
+        if ($options instanceof \Illuminate\Database\Eloquent\Model) {
+            return [
+                'status' => 'success',
+                'error' => NULL,
+                'message' => config('review_message.set_options.success_message'),
+                'data' => [],
+            ];
+        }
+
+        return [
+            'status' => 'failed',
+            'error' => $options->getPrevious()->getMessage(),
+            'message' => config('review_message.set_options.failed_message'),
+            'data' => [],
+        ];
+    }
 }
