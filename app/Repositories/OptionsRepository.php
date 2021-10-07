@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 
 use App\Models\Option;
-use Throwable;
 
 class OptionsRepository
 {
