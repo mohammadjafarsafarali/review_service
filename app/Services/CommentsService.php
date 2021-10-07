@@ -52,15 +52,27 @@ class CommentsService
         //check if options is null (means hidden product)
         if (is_null($product_options)) {
             throw new InsertCommentException(config('review_message.insert_comment.product_visibility_failed'), 422);
-        } elseif ( //check if comment mode or vote mode is on `REVIEW_CONSUMER_MODE`
+        }
+        //check if comment mode or vote mode is on `REVIEW_CONSUMER_MODE`
+        elseif (
             $product_options->comments_mode == $product_options::REVIEW_CONSUMER_MODE ||
             $product_options->vote_mode == $product_options::REVIEW_CONSUMER_MODE
         ) {
             //check user has any order by `product_id = $request->product_id` on order service
             //for example : $userHasOrder = BOOLEAN DATA FROM ORDER SERVICE
-            $userHasOrder = TRUE; #TODO: MOCK DATA INSTEAD OF ORDER SERVICE RESPONSE
+            $userHasOrder = FALSE; #TODO: MOCK DATA INSTEAD OF ORDER SERVICE RESPONSE
             if (!$userHasOrder)
                 throw new InsertCommentException(config('review_message.insert_comment.review_consumer_failed'), 422);
+        }
+        //check if comment mode is deavtive and api has vote in body
+        // ( its like a trick because client-side will not render its component if get deactive mode from get-options api)
+        elseif ($product_options->comments_mode == $product_options::REVIEW_DEACTIVE_MODE && $request->filled('comment')) {
+            throw new InsertCommentException(config('review_message.insert_comment.review_deactive_failed'), 422);
+        }
+        //check if vote mode is deavtive and api has vote in body
+        // ( its like a trick because client-side will not render its component if get deactive mode from get-options api)
+        elseif ($product_options->vote_mode == $product_options::REVIEW_DEACTIVE_MODE && $request->filled('vote')) {
+            throw new InsertCommentException(config('review_message.insert_comment.review_deactive_failed'), 422);
         }
 
         //insert comment
