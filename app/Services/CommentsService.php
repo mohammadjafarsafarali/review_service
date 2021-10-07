@@ -4,9 +4,8 @@
 namespace App\Services;
 
 
-use App\Exceptions\UpdateReviewStatusException;
-use App\Http\Requests\Api\v1\ChangeReviewStatusRequest;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use App\Exceptions\UpdateReviewStatusException;
 use App\Exceptions\InsertCommentException;
 use App\Repositories\CommentsRepository;
 

@@ -3,8 +3,8 @@
 namespace App\Repositories;
 
 
-use App\Exceptions\InsertCommentException;
 use App\Exceptions\UpdateReviewStatusException;
+use App\Exceptions\InsertCommentException;
 use Illuminate\Database\QueryException;
 use App\Models\Comment;
 use Exception;
