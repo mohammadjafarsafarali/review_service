@@ -1,0 +1,588 @@
+{
+	"info": {
+		"_postman_id": "479d87d8-0774-4d66-b521-48511394e69c",
+		"name": "Review Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Set Options",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"visible\": true,\n    \"comments_mode\": \"public\",\n    \"vote_mode\": \"public\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/review/set-options/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"review",
+						"set-options",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Set Options",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"visible\": true,\n    \"comments_mode\": \"public\",\n    \"vote_mode\": \"public\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/review/set-options/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"set-options",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:20:37 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:20:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.16"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"تنظیمات مدنظر باموفقیت به ثبت رسید\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Options",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/v1/review/get-options/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"review",
+						"get-options",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Options",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v1/review/get-options/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"get-options",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:06:21 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:06:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.16"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": null,\n    \"data\": {\n        \"is_visible\": true,\n        \"options\": {\n            \"comments\": {\n                \"mode\": \"public\",\n                \"message\": \"\"\n            },\n            \"vote\": {\n                \"mode\": \"public\",\n                \"message\": \"\"\n            }\n        },\n        \"summery\": {\n            \"comments\": [\n                \"سلام، این محصول عالی بود\",\n                \"سلام، این محصول عالی بود\",\n                \"سلام، این محصول عالی بود\"\n            ],\n            \"comments_count\": 8,\n            \"vote\": 3.8\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Insert Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 3,\n    \"comment\": \"این محصول حرف نداشت\",\n    \"vote\": 6\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/review/review-insert",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"review",
+						"review-insert"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Insert Review",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\": 3,\n    \"comment\": \"این محصول حرف نداشت\",\n    \"vote\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/review/review-insert",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"review-insert"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:21:50 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:21:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.16"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"نظر شما باموفقیت به ثبت رسید\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "List Of Pending Reviews",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/v1/review/review-pending-list",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"review",
+						"review-pending-list"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List Of Pending Reviews",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/v1/review/review-pending-list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"review-pending-list"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:22:03 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:22:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.16"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"\",\n    \"data\": [\n        {\n            \"id\": 10,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"سلام، این محصول عالی بود\",\n            \"vote\": 8,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 11,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"سلام، این محصول عالی بود\",\n            \"vote\": 9,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 12,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"سلام، اdvvdvdvdحصول عالی بود\",\n            \"vote\": 1,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 15,\n            \"product_id\": 3,\n            \"user_id\": null,\n            \"comment\": \"این محصول حرف نداشت\",\n            \"vote\": 1,\n            \"status\": \"pending\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Change Review Status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"review_id\": \"1\",\n    \"status\": \"passed\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/review/status-change",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"review",
+						"status-change"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Change Review Status",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"review_id\": \"14\",\n    \"status\": \"passed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/review/status-change",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"status-change"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:00:23 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Oct 2021 19:00:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.16"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "56"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"تغییر وضعیت نظر قبت شده، با موفقیت انجام شد\",\n    \"data\": null\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": ""
+		}
+	]
+}
