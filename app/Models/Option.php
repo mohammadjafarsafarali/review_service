@@ -29,6 +29,30 @@ class Option extends Model
     }
 
     /**
+     * @return array|string[]
+     * @author mj.safarali
+     */
+    public function getFullCommentsModeAttribute(): array
+    {
+        return [
+            'mode' => $this->comments_mode,
+            'message' => config("review_message.comments_mode.{$this->comments_mode}")
+        ];
+    }
+
+    /**
+     * @return array
+     * @author mj.safarali
+     */
+    public function getFullVoteModeAttribute(): array
+    {
+        return [
+            'mode' => $this->vote_mode,
+            'message' => config("review_message.vote_mode.{$this->vote_mode}")
+        ];
+    }
+
+    /**
      * @param $query
      * @return mixed
      * @author mj.safarali

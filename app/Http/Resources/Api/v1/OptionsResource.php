@@ -18,8 +18,8 @@ class OptionsResource extends JsonResource
             'is_visible' => $this->is_visible ?? false,
             'options' =>
                 (isset($this->is_visible) && $this->is_visible) ? [
-                    'comments_mode' => $this->comments_mode,
-                    'vote_mode' => $this->vote_mode,
+                    'comments' => $this->full_comments_mode,
+                    'vote' => $this->full_vote_mode,
                 ] : NULL
         ]);
     }
