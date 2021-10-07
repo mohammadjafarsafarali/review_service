@@ -48,6 +48,6 @@ class OptionsController extends Controller
         //pass data to option service for setting data
         $options = $this->optionsService->setOptions($product_id, $request);
         //return result
-        return new SetOptionsResource($options);
+        return new SetOptionsResource($options, $options['status'] == 'success' ? 200 : 422);
     }
 }
