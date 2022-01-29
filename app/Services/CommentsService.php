@@ -1,13 +1,17 @@
 <?php
 
-
 namespace App\Services;
 
-
+use App\Exceptions\CustomApiException;
+use App\Pipelines\After;
+use App\Pipelines\DeactiveComment;
+use App\Pipelines\DeactiveVote;
+use App\Pipelines\InvisibleProduct;
+use App\Pipelines\ReviewConsumerMode;
+use App\Pipelines\ReviewConsumerModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use App\Exceptions\UpdateReviewStatusException;
-use App\Exceptions\InsertCommentException;
 use App\Repositories\CommentsRepository;
+use Illuminate\Pipeline\Pipeline;
 
 class CommentsService
 {
@@ -26,64 +30,33 @@ class CommentsService
     }
 
     /**
-     * @param $request
-     * @return array
      * @throws BindingResolutionException
-     * @throws InsertCommentException
-     * @author mj.safarali
+     * @throws CustomApiException
      */
-    public function insertComment($request): array
+    public function insertComment($request)
     {
-        $product_options = $this->checkAndPrepareDataForInsert($request);
-
-        $preparing_data = [
-            'user_id' => NULL, #TODO: FILL WHEN USER IS LOGGED_IN AND RECEIVE FROM AUTH SERVICE
-            'comment' => $request->comment,
-            'vote' => $request->vote
+        //create passable array
+        $data = [
+            'request' => $request,
+            'options' => (app()->make(OptionsService::class))->returnOptionsIfVisible($request->product_id)
         ];
-        $this->commentsRepository->insertComment($product_options, $preparing_data);
-        //return response
-        return responseApi('success', NULL, config('review_message.insert_comment.success_message'), NULL);
-    }
 
-    /**
-     * @throws BindingResolutionException
-     * @throws InsertCommentException
-     */
-    private function checkAndPrepareDataForInsert($request)
-    {
-        $optionsService = app()->make(OptionsService::class);
-
-        //check product visibility and check if comment and vote need user be consumer
-        $product_options = $optionsService->returnOptionsIfVisible($request->product_id);
-
-        //check if options is null (means hidden product)
-        if (is_null($product_options)) {
-            throw new InsertCommentException(config('review_message.insert_comment.product_visibility_failed'), 422);
-        } //check if comment mode or vote mode is on `REVIEW_CONSUMER_MODE`
-        elseif (
-            $product_options->comments_mode == $product_options::REVIEW_CONSUMER_MODE ||
-            $product_options->vote_mode == $product_options::REVIEW_CONSUMER_MODE
-        ) {
-            //check user has any order by `product_id = $request->product_id` on order service
-            //for example : $userHasOrder = BOOLEAN DATA FROM ORDER SERVICE
-            $userHasOrder = FALSE; #TODO: MOCK DATA INSTEAD OF ORDER SERVICE RESPONSE
-            if (!$userHasOrder)
-                throw new InsertCommentException(config('review_message.insert_comment.review_consumer_failed'), 422);
-        }
-        //check if comment mode is deavtive and api has vote in body
-        // ( its like a trick because client-side will not render its component if get deactive mode from get-options api)
-        elseif ($product_options->comments_mode == $product_options::REVIEW_DEACTIVE_MODE && $request->filled('comment')) {
-            throw new InsertCommentException(config('review_message.insert_comment.review_deactive_failed'), 422);
-        }
-        //check if vote mode is deavtive and api has vote in body
-        // ( its like a trick because client-side will not render its component if get deactive mode from get-options api)
-        elseif ($product_options->vote_mode == $product_options::REVIEW_DEACTIVE_MODE && $request->filled('vote')) {
-            throw new InsertCommentException(config('review_message.insert_comment.review_deactive_failed'), 422);
-        }
-
-        //insert comment
-        return $product_options;
+        return app(Pipeline::class)
+            ->send($data)
+            ->through([
+                InvisibleProduct::class,
+                ReviewConsumerMode::class,
+                DeactiveComment::class,
+                DeactiveVote::class,
+            ])
+            ->then(function ($data) {
+                return $this->commentsRepository->create([
+                    'product_id' => $data['request']->product_id,
+                    'user_id' => NULL, #TODO: FILL WHEN USER IS LOGGED_IN AND RECEIVE FROM AUTH SERVICE
+                    'comment' => $data['request']->comment,
+                    'vote' => $data['request']->vote
+                ]);
+            });
     }
 
     /**
@@ -98,11 +71,11 @@ class CommentsService
     /**
      * @param $request
      * @return mixed
-     * @throws UpdateReviewStatusException
      * @author mj.safarali
      */
     public function changeReviewStatus($request)
     {
         return $this->commentsRepository->changeReviewStatus($request);
     }
+
 }

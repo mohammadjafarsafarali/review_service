@@ -1,10 +1,8 @@
 <?php
 
-
 namespace App\Services;
 
-
-use App\Exceptions\SetOptionsExceptions;
+use App\Repositories\CommentsRepository;
 use App\Repositories\OptionsRepository;
 
 class OptionsService
@@ -23,6 +21,21 @@ class OptionsService
         $this->optionsRepository = $optionsRepository;
     }
 
+    public function getOptions($product_id)
+    {
+        //get options
+        $option = $this->returnOptionsIfVisible($product_id);
+
+        //get some data from comment repository
+        $commentRepo = app()->make(CommentsRepository::class);
+        //vote average
+        $option->vote_avg = floatval($commentRepo->voteAverageCalculator());
+        $option->comments_count = intval($commentRepo->commentsCount());
+        $option->last_comments = $commentRepo->lastComments(3);
+
+        return $option;
+    }
+
     /**
      * @param $product_id
      * @return mixed
@@ -34,16 +47,12 @@ class OptionsService
     }
 
     /**
-     * @param $product_id
      * @param $request
-     * @return array
-     * @throws SetOptionsExceptions
+     * @return mixed
      * @author mj.safarali
      */
-    public function setOptions($product_id, $request): array
+    public function setOptions($request)
     {
-        $this->optionsRepository->setOptions($product_id, $request);
-        //return response
-        return responseApi('success', NULL, config('review_message.set_options.success_message'));
+        return $this->optionsRepository->setOptions($request);
     }
 }

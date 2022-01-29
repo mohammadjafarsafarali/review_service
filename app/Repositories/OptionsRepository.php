@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Repositories;
 
-
-use App\Exceptions\SetOptionsExceptions;
 use App\Models\Option;
 
 class OptionsRepository
@@ -40,42 +37,26 @@ class OptionsRepository
     public function returnOptionsIfVisible($product_id)
     {
         return $this->option
-            ->select(['id', 'product_id', 'product_visibility', 'comments_mode', 'vote_mode', 'vote_avg'])
+            ->select(['product_id', 'product_visibility', 'comments_mode', 'vote_mode'])
             ->where('product_id', '=', $product_id)
             ->visible()
-            ->with(['comments' => function ($query) {
-                $query->select(['option_id', 'comment'])
-                    ->passed()
-                    ->orderBy('updated_at', 'desc')
-                    ->take(3);
-            }])
-            ->withCount(['comments' => function ($query) {
-                $query->passed();
-            }])
-            ->first();
+            ->firstOrFail();
     }
 
     /**
-     * @param $product_id
      * @param $request
      * @return mixed
-     * @throws SetOptionsExceptions
      * @author mj.safarali
      */
-    public function setOptions($product_id, $request)
+    public function setOptions($request)
     {
-        try {
-            return $this->option->updateOrCreate(
-                ['product_id' => $product_id],
-                [
-                    'product_visibility' => $request->visible,
-                    'comments_mode' => $request->comments_mode,
-                    'vote_mode' => $request->vote_mode,
-                ]
-            );
-        } catch (\Illuminate\Database\QueryException $exception) {
-            throw new SetOptionsExceptions(config('review_message.set_options.failed_message'), 422);
-        }
-
+        return $this->option->updateOrCreate(
+            ['product_id' => $request->product_id],
+            [
+                'product_visibility' => $request->visible,
+                'comments_mode' => $request->comments_mode,
+                'vote_mode' => $request->vote_mode,
+            ]
+        );
     }
 }
