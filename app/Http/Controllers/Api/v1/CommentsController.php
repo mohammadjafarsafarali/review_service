@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-use App\Http\Resources\Api\v1\ChangeReviewStatusResource;
 use App\Http\Requests\Api\v1\ChangeReviewStatusRequest;
-use App\Http\Resources\Api\v1\InsertCommentResource;
 use App\Http\Requests\Api\v1\InsertReviewRequest;
-use App\Exceptions\UpdateReviewStatusException;
-use App\Http\Resources\Api\v1\ReviewCollection;
-use App\Exceptions\InsertCommentException;
 use App\Http\Controllers\Controller;
 use App\Services\CommentsService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Exception;
 
 class CommentsController extends Controller
 {
@@ -27,47 +22,51 @@ class CommentsController extends Controller
      */
     public function __construct(CommentsService $commentsService)
     {
+        parent::__construct();
         $this->commentsService = $commentsService;
     }
 
     /**
-     * @param Request $request
-     * @return InsertCommentResource
-     * @throws InsertCommentException
-     * @throws BindingResolutionException
+     * @param InsertReviewRequest $request
+     * @return JsonResponse
      * @author mj.safarali
      */
-    public function insert(InsertReviewRequest $request): InsertCommentResource
+    public function insert(InsertReviewRequest $request): JsonResponse
     {
-        //insert comments
-        $comment = $this->commentsService->insertComment($request);
-        //return response
-        return new InsertCommentResource($comment);
+        try {
+            $response = $this->commentsService->insertComment($request);
+            return $this->setMetaData($response->toArray())->successResponse();
+        } catch (Exception $e) {
+            return ($this->exceptionHandler->exceptionHandler($e));
+        }
     }
 
     /**
-     * @return ReviewCollection
+     * @return JsonResponse
      * @author mj.safarali
      */
-    public function getAllPendingComments(): ReviewCollection
+    public function getAllPendingComments(): JsonResponse
     {
-        //get all pending comments
-        $comments = $this->commentsService->getAllPendingComments();
-        //return response
-        return new ReviewCollection($comments);
+        try {
+            $response = $this->commentsService->getAllPendingComments();
+            return $this->setMetaData($response->toArray())->successResponse();
+        } catch (Exception $e) {
+            return ($this->exceptionHandler->exceptionHandler($e));
+        }
     }
 
     /**
      * @param ChangeReviewStatusRequest $request
-     * @return ChangeReviewStatusResource
-     * @throws UpdateReviewStatusException
+     * @return JsonResponse
      * @author mj.safarali
      */
-    public function changeReviewStatus(ChangeReviewStatusRequest $request): ChangeReviewStatusResource
+    public function changeReviewStatus(ChangeReviewStatusRequest $request): JsonResponse
     {
-        //update status of review
-        $comments = $this->commentsService->changeReviewStatus($request);
-        //return response
-        return new ChangeReviewStatusResource($comments);
+        try {
+            $response = $this->commentsService->changeReviewStatus($request);
+            return $this->setMetaData($response->toArray())->successResponse();
+        } catch (Exception $e) {
+            return ($this->exceptionHandler->exceptionHandler($e));
+        }
     }
 }
