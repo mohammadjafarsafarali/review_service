@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"visible\": true,\n    \"comments_mode\": \"public\",\n    \"vote_mode\": \"public\"\n}",
+					"raw": "{\n    \"product_id\": 1,\n    \"visible\": true,\n    \"comments_mode\": \"public\",\n    \"vote_mode\": \"public\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -26,7 +26,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/v1/review/set-options/1",
+					"raw": "{{url}}/api/v1/review/set-options",
 					"host": [
 						"{{url}}"
 					],
@@ -34,14 +34,13 @@
 						"api",
 						"v1",
 						"review",
-						"set-options",
-						"1"
+						"set-options"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "Success Set Options",
+					"name": "Set Options",
 					"originalRequest": {
 						"method": "POST",
 						"header": [
@@ -53,7 +52,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"visible\": true,\n    \"comments_mode\": \"public\",\n    \"vote_mode\": \"public\"\n}",
+							"raw": "{\n    \"product_id\": 1,\n    \"visible\": true,\n    \"comments_mode\": \"public\",\n    \"vote_mode\": \"public\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -61,7 +60,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/review/set-options/1",
+							"raw": "{{url}}/api/v1/review/set-options",
 							"host": [
 								"{{url}}"
 							],
@@ -69,8 +68,7 @@
 								"api",
 								"v1",
 								"review",
-								"set-options",
-								"1"
+								"set-options"
 							]
 						}
 					},
@@ -84,11 +82,11 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:20:37 GMT"
+							"value": "Sat, 29 Jan 2022 22:33:37 GMT"
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:20:37 GMT"
+							"value": "Sat, 29 Jan 2022 22:33:37 GMT"
 						},
 						{
 							"key": "Connection",
@@ -96,7 +94,7 @@
 						},
 						{
 							"key": "X-Powered-By",
-							"value": "PHP/7.4.16"
+							"value": "PHP/7.4.27"
 						},
 						{
 							"key": "Cache-Control",
@@ -120,7 +118,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"تنظیمات مدنظر باموفقیت به ثبت رسید\",\n    \"data\": null\n}"
+					"body": "{\n    \"meta\": {\n        \"msg\": \"Your request Successfully handled.\",\n        \"status\": \"Success\",\n        \"statusCode\": 0\n    },\n    \"data\": {\n        \"product_id\": 1,\n        \"product_visibility\": true,\n        \"comments_mode\": \"public\",\n        \"vote_mode\": \"public\",\n        \"updated_at\": \"2022-01-29T22:33:37.000000Z\",\n        \"created_at\": \"2022-01-29T22:33:37.000000Z\",\n        \"id\": 1\n    }\n}"
 				}
 			]
 		},
@@ -185,11 +183,11 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:06:21 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:40 GMT"
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:06:21 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:40 GMT"
 						},
 						{
 							"key": "Connection",
@@ -197,7 +195,7 @@
 						},
 						{
 							"key": "X-Powered-By",
-							"value": "PHP/7.4.16"
+							"value": "PHP/7.4.27"
 						},
 						{
 							"key": "Cache-Control",
@@ -213,7 +211,7 @@
 						},
 						{
 							"key": "X-RateLimit-Remaining",
-							"value": "58"
+							"value": "59"
 						},
 						{
 							"key": "Access-Control-Allow-Origin",
@@ -221,7 +219,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": null,\n    \"data\": {\n        \"is_visible\": true,\n        \"options\": {\n            \"comments\": {\n                \"mode\": \"public\",\n                \"message\": \"\"\n            },\n            \"vote\": {\n                \"mode\": \"public\",\n                \"message\": \"\"\n            }\n        },\n        \"summery\": {\n            \"comments\": [\n                \"سلام، این محصول عالی بود\",\n                \"سلام، این محصول عالی بود\",\n                \"سلام، این محصول عالی بود\"\n            ],\n            \"comments_count\": 8,\n            \"vote\": 3.8\n        }\n    }\n}"
+					"body": "{\n    \"meta\": {\n        \"msg\": \"Your request Successfully handled.\",\n        \"status\": \"Success\",\n        \"statusCode\": 0\n    },\n    \"data\": {\n        \"product_id\": 1,\n        \"product_visibility\": 1,\n        \"comments_mode\": \"public\",\n        \"vote_mode\": \"public\",\n        \"vote_avg\": 3.4,\n        \"comments_count\": 5,\n        \"last_comments\": [\n            {\n                \"id\": 5,\n                \"product_id\": 1,\n                \"user_id\": null,\n                \"comment\": \"این محصول حرف نداشت\",\n                \"vote\": 2,\n                \"updated_at\": \"2022-01-29T22:35:36.000000Z\"\n            },\n            {\n                \"id\": 4,\n                \"product_id\": 1,\n                \"user_id\": null,\n                \"comment\": \"این محصول حرف نداشت\",\n                \"vote\": 3,\n                \"updated_at\": \"2022-01-29T22:35:34.000000Z\"\n            },\n            {\n                \"id\": 3,\n                \"product_id\": 1,\n                \"user_id\": null,\n                \"comment\": \"این محصول حرف نداشت\",\n                \"vote\": 4,\n                \"updated_at\": \"2022-01-29T22:35:30.000000Z\"\n            }\n        ]\n    }\n}"
 				}
 			]
 		},
@@ -238,7 +236,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"product_id\": 3,\n    \"comment\": \"این محصول حرف نداشت\",\n    \"vote\": 6\n}",
+					"raw": "{\n    \"product_id\": 1,\n    \"comment\": \"این محصول حرف نداشت\",\n    \"vote\": 2\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -272,7 +270,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_id\": 3,\n    \"comment\": \"این محصول حرف نداشت\",\n    \"vote\": 1\n}",
+							"raw": "{\n    \"product_id\": 1,\n    \"comment\": \"این محصول حرف نداشت\",\n    \"vote\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -302,11 +300,11 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:21:50 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:24 GMT"
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:21:50 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:24 GMT"
 						},
 						{
 							"key": "Connection",
@@ -314,7 +312,7 @@
 						},
 						{
 							"key": "X-Powered-By",
-							"value": "PHP/7.4.16"
+							"value": "PHP/7.4.27"
 						},
 						{
 							"key": "Cache-Control",
@@ -330,7 +328,7 @@
 						},
 						{
 							"key": "X-RateLimit-Remaining",
-							"value": "59"
+							"value": "52"
 						},
 						{
 							"key": "Access-Control-Allow-Origin",
@@ -338,7 +336,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"نظر شما باموفقیت به ثبت رسید\",\n    \"data\": null\n}"
+					"body": "{\n    \"meta\": {\n        \"msg\": \"Your request Successfully handled.\",\n        \"status\": \"Success\",\n        \"statusCode\": 0\n    },\n    \"data\": {\n        \"status\": \"pending\",\n        \"product_id\": 1,\n        \"user_id\": null,\n        \"comment\": \"این محصول حرف نداشت\",\n        \"vote\": 2,\n        \"updated_at\": \"2022-01-29T22:35:23.000000Z\",\n        \"created_at\": \"2022-01-29T22:35:23.000000Z\",\n        \"id\": 5\n    }\n}"
 				}
 			]
 		},
@@ -401,11 +399,11 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:22:03 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:26 GMT"
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:22:03 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:26 GMT"
 						},
 						{
 							"key": "Connection",
@@ -413,7 +411,7 @@
 						},
 						{
 							"key": "X-Powered-By",
-							"value": "PHP/7.4.16"
+							"value": "PHP/7.4.27"
 						},
 						{
 							"key": "Cache-Control",
@@ -429,7 +427,7 @@
 						},
 						{
 							"key": "X-RateLimit-Remaining",
-							"value": "58"
+							"value": "51"
 						},
 						{
 							"key": "Access-Control-Allow-Origin",
@@ -437,7 +435,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"\",\n    \"data\": [\n        {\n            \"id\": 10,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"سلام، این محصول عالی بود\",\n            \"vote\": 8,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 11,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"سلام، این محصول عالی بود\",\n            \"vote\": 9,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 12,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"سلام، اdvvdvdvdحصول عالی بود\",\n            \"vote\": 1,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 15,\n            \"product_id\": 3,\n            \"user_id\": null,\n            \"comment\": \"این محصول حرف نداشت\",\n            \"vote\": 1,\n            \"status\": \"pending\"\n        }\n    ]\n}"
+					"body": "{\n    \"meta\": {\n        \"msg\": \"Your request Successfully handled.\",\n        \"status\": \"Success\",\n        \"statusCode\": 0\n    },\n    \"data\": [\n        {\n            \"id\": 3,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"این محصول حرف نداشت\",\n            \"vote\": 4,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 4,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"این محصول حرف نداشت\",\n            \"vote\": 3,\n            \"status\": \"pending\"\n        },\n        {\n            \"id\": 5,\n            \"product_id\": 1,\n            \"user_id\": null,\n            \"comment\": \"این محصول حرف نداشت\",\n            \"vote\": 2,\n            \"status\": \"pending\"\n        }\n    ]\n}"
 				}
 			]
 		},
@@ -454,7 +452,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"review_id\": \"1\",\n    \"status\": \"passed\"\n}",
+					"raw": "{\n    \"review_id\": 5,\n    \"status\": \"passed\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -488,7 +486,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"review_id\": \"14\",\n    \"status\": \"passed\"\n}",
+							"raw": "{\n    \"review_id\": 5,\n    \"status\": \"passed\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -518,11 +516,11 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:00:23 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:36 GMT"
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 07 Oct 2021 19:00:23 GMT"
+							"value": "Sat, 29 Jan 2022 22:35:36 GMT"
 						},
 						{
 							"key": "Connection",
@@ -530,7 +528,7 @@
 						},
 						{
 							"key": "X-Powered-By",
-							"value": "PHP/7.4.16"
+							"value": "PHP/7.4.27"
 						},
 						{
 							"key": "Cache-Control",
@@ -546,7 +544,7 @@
 						},
 						{
 							"key": "X-RateLimit-Remaining",
-							"value": "56"
+							"value": "48"
 						},
 						{
 							"key": "Access-Control-Allow-Origin",
@@ -554,7 +552,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": \"success\",\n    \"error\": null,\n    \"message\": \"تغییر وضعیت نظر قبت شده، با موفقیت انجام شد\",\n    \"data\": null\n}"
+					"body": "{\n    \"meta\": {\n        \"msg\": \"Your request Successfully handled.\",\n        \"status\": \"Success\",\n        \"statusCode\": 0\n    },\n    \"data\": {\n        \"id\": 5,\n        \"product_id\": 1,\n        \"user_id\": null,\n        \"comment\": \"این محصول حرف نداشت\",\n        \"vote\": 2,\n        \"status\": \"passed\",\n        \"deleted_at\": null,\n        \"created_at\": \"2022-01-29T22:35:23.000000Z\",\n        \"updated_at\": \"2022-01-29T22:35:36.000000Z\"\n    }\n}"
 				}
 			]
 		}
