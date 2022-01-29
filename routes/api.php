@@ -18,7 +18,7 @@ Route::prefix('v1/review')->group(function () {
     //get options for one product
     Route::get('get-options/{product_id}', [OptionsController::class, 'getOptions']);
     //set options for one product
-    Route::post('set-options/{product_id}', [OptionsController::class, 'setOptions']);
+    Route::post('set-options', [OptionsController::class, 'setOptions']);
     //insert new review(comment or vote or both)
     Route::post('review-insert', [CommentsController::class, 'insert']);
     //get list of all pending review
