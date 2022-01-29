@@ -21,8 +21,7 @@ class Option extends Model
         'product_id',
         'product_visibility',
         'comments_mode',
-        'vote_mode',
-        'vote_avg'
+        'vote_mode'
     ];
 
     /**
@@ -66,14 +65,5 @@ class Option extends Model
     public function scopeVisible($query)
     {
         return $query->where('product_visibility', '=', true);
-    }
-
-    /**
-     * @return HasMany
-     * @author mj.safarali
-     */
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
     }
 }
