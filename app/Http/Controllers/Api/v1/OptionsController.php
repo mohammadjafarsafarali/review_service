@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Resources\Api\v1\SetOptionsResource;
 use App\Http\Requests\Api\v1\SetOptionsRequest;
-use App\Http\Resources\Api\v1\OptionsResource;
-use App\Exceptions\SetOptionsExceptions;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use App\Services\OptionsService;
+use Exception;
 
 class OptionsController extends Controller
 {
@@ -22,34 +20,37 @@ class OptionsController extends Controller
      */
     public function __construct(OptionsService $optionsService)
     {
+        parent::__construct();
         $this->optionsService = $optionsService;
     }
 
     /**
      * @param $product_id
-     * @return OptionsResource
+     * @return JsonResponse
      * @author mj.safarali
      */
-    public function getOptions($product_id): OptionsResource
+    public function getOptions($product_id): JsonResponse
     {
-        //if product is visible then return the options
-        $options = $this->optionsService->returnOptionsIfVisible($product_id);
-        //return result
-        return new OptionsResource($options);
+        try {
+            $response = $this->optionsService->getOptions($product_id);
+            return $this->setMetaData($response->toArray())->successResponse();
+        } catch (Exception $e) {
+            return ($this->exceptionHandler->exceptionHandler($e));
+        }
     }
 
     /**
-     * @param $product_id
      * @param SetOptionsRequest $request
-     * @return SetOptionsResource
-     * @throws SetOptionsExceptions
+     * @return JsonResponse
      * @author mj.safarali
      */
-    public function setOptions($product_id, SetOptionsRequest $request): SetOptionsResource
+    public function setOptions(SetOptionsRequest $request): JsonResponse
     {
-        //pass data to option service for setting data
-        $options = $this->optionsService->setOptions($product_id, $request);
-        //return result
-        return new SetOptionsResource($options);
+        try {
+            $response = $this->optionsService->setOptions($request);
+            return $this->setMetaData($response->toArray())->successResponse();
+        } catch (Exception $e) {
+            return ($this->exceptionHandler->exceptionHandler($e));
+        }
     }
 }
